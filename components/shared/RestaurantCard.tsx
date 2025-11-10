@@ -13,7 +13,7 @@ type RestaurantCardProps = {
 export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
     return (
         <Link href={`/restaurant/${restaurant.slug}`} className="group">
-            <Card className="w-64 md:w-full shrink-0 hover:scale-[1.02] transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#FF6B00]/20 card-shine">
+            <Card className="w-full shrink-0 hover:scale-[1.02] transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#FF6B00]/20 card-shine">
                 <div className="relative h-44 overflow-hidden">
                     <Image
                         src={restaurant.image}

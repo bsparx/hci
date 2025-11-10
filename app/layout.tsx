@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "FoodHub - Order Food Online",
+  title: "FoodPapa - Order Food Online",
   description: "Modern food delivery app - Order your favorite food from the best restaurants",
 };
 

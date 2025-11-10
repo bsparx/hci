@@ -63,10 +63,10 @@ export default function LoginPage() {
                     {/* Logo/Header */}
                     <div className="text-center mb-8">
                         <div className="w-20 h-20 bg-gradient-to-br from-[#FF6B00] to-[#FF8C3A] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                            <span className="text-4xl">🍔</span>
+                            <span className="text-4xl">👨‍🍳</span>
                         </div>
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back!</h1>
-                        <p className="text-gray-600">Sign in to continue to FoodHub</p>
+                        <p className="text-gray-600">Sign in to continue to FoodPapa</p>
                     </div>
 
                     {/* Error Message */}

@@ -191,7 +191,7 @@ export default function AccountPage() {
                                     Sign in to Your Account
                                 </h2>
                                 <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                                    Join FoodHub to track your orders, save favorites, and unlock exclusive rewards!
+                                    Join FoodPapa to track your orders, save favorites, and unlock exclusive rewards!
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <button
@@ -259,7 +259,7 @@ export default function AccountPage() {
                                                 PRO
                                             </span>
                                         </div>
-                                        <p className="text-[#6C757D] mb-4 font-medium">{user?.email || 'guest@foodhub.com'}</p>
+                                        <p className="text-[#6C757D] mb-4 font-medium">{user?.email || 'guest@foodpapa.com'}</p>
 
                                     {/* Stats Row */}
                                     <div className="flex items-center justify-center sm:justify-start gap-6 text-sm">
@@ -396,7 +396,7 @@ export default function AccountPage() {
                         <p className="text-sm font-medium">Made with love for food lovers</p>
                         <Sparkles size={16} className="text-[#FF6B00]" />
                     </div>
-                    <p className="text-[#6C757D] text-xs">Version 1.0.0 • © 2025 FoodHub</p>
+                    <p className="text-[#6C757D] text-xs">Version 1.0.0 • © 2025 FoodPapa</p>
                 </div>
             </div>
 

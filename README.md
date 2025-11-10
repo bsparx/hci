@@ -1,4 +1,4 @@
-# FoodHub - Premium Food Delivery Application 🍕
+# FoodPapa - Premium Food Delivery Application 🍕
 
 A **stunning, feature-rich** food delivery application built with Next.js 14+, TypeScript, and Tailwind CSS v4. This project showcases a complete food ordering experience with **world-class UI/UX** that rivals top platforms like Uber Eats and DoorDash.
 

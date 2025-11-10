@@ -98,23 +98,46 @@ export default function Home() {
             {/* Header with Glass Effect */}
             <header className="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-40 border-b border-gray-100" role="banner">
                 <div className="max-w-7xl mx-auto px-4 py-3">
+                    {/* Logo Row */}
                     <div className="flex items-center justify-between mb-3">
-                        <button
-                            className="flex items-center gap-2 group hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2 rounded-lg p-1.5 -m-1.5"
-                            aria-label="Your location: 123 Main St, Downtown. Click to change location"
-                        >
-                            <div className="p-1.5 bg-linear-to-br from-[#FF6B00] to-[#FF8C3A] rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300" aria-hidden="true">
-                                <MapPin size={16} className="text-white" />
+                        {/* Logo */}
+                        <div className="flex items-center gap-3">
+                            <div className="relative group">
+                                {/* Logo Circle with Gradient */}
+                                <div className="w-11 h-11 bg-linear-to-br from-[#FF6B00] via-[#FF7A1F] to-[#FF8C3A] rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-105 relative overflow-hidden">
+                                    {/* Animated shine effect */}
+                                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                                    {/* Icon */}
+                                    <span className="text-2xl relative z-10" role="img" aria-label="FoodPapa logo">👨‍🍳</span>
+                                </div>
+                                {/* Decorative ring */}
+                                <div className="absolute -inset-1 bg-linear-to-br from-[#FF6B00]/20 to-[#FF8C3A]/20 rounded-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                             </div>
-                            <div className="text-left">
-                                <p className="text-xs font-semibold text-[#212529] flex items-center gap-0.5">
-                                    Your Location
-                                    <ChevronRight size={12} className="text-[#6C757D]" aria-hidden="true" />
-                                </p>
-                                <p className="text-[10px] text-[#6C757D]">123 Main St, Downtown</p>
+                            <div>
+                                <h1 className="text-lg font-bold bg-linear-to-r from-[#FF6B00] to-[#FF8C3A] bg-clip-text text-transparent leading-none">
+                                    FoodPapa
+                                </h1>
+                                <p className="text-[10px] text-[#6C757D] font-medium">Order Your Favorite Food</p>
                             </div>
-                        </button>
-                        <div className="flex items-center gap-2">
+                        </div>
+
+                        {/* Location & Actions */}
+                        <div className="flex items-center gap-3">
+                            <button
+                                className="flex items-center gap-2 group hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2 rounded-lg p-1.5 -m-1.5"
+                                aria-label="Your location: 123 Main St, Downtown. Click to change location"
+                            >
+                                <div className="p-1.5 bg-linear-to-br from-[#FF6B00] to-[#FF8C3A] rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300" aria-hidden="true">
+                                    <MapPin size={16} className="text-white" />
+                                </div>
+                                <div className="text-left hidden sm:block">
+                                    <p className="text-xs font-semibold text-[#212529] flex items-center gap-0.5">
+                                        Your Location
+                                        <ChevronRight size={12} className="text-[#6C757D]" aria-hidden="true" />
+                                    </p>
+                                    <p className="text-[10px] text-[#6C757D]">123 Main St, Downtown</p>
+                                </div>
+                            </button>
                             {(searchQuery || selectedCuisine) && (
                                 <button
                                     onClick={clearSearch}

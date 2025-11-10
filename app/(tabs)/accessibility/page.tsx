@@ -295,7 +295,7 @@ export default function AccessibilityPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
-                        
+
                         {isLanguageDropdownOpen && (
                             <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 animate-in">
                                 {languageOptions.map((language) => (
@@ -305,9 +305,8 @@ export default function AccessibilityPage() {
                                             setSelectedLanguage(language.value);
                                             setIsLanguageDropdownOpen(false);
                                         }}
-                                        className={`w-full p-4 text-left flex items-center gap-3 hover:bg-gray-50 transition-colors ${
-                                            selectedLanguage === language.value ? 'bg-[#FF6B00]/5' : ''
-                                        }`}
+                                        className={`w-full p-4 text-left flex items-center gap-3 hover:bg-gray-50 transition-colors ${selectedLanguage === language.value ? 'bg-[#FF6B00]/5' : ''
+                                            }`}
                                     >
                                         <span className="text-2xl">{language.flag}</span>
                                         <span className="flex-1 font-medium text-gray-900">{language.label}</span>

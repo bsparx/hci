@@ -261,47 +261,47 @@ export default function AccountPage() {
                                         </div>
                                         <p className="text-[#6C757D] mb-4 font-medium">{user?.email || 'guest@foodpapa.com'}</p>
 
-                                    {/* Stats Row */}
-                                    <div className="flex items-center justify-center sm:justify-start gap-6 text-sm">
-                                        <div className="text-center sm:text-left">
-                                            <p className="font-bold text-[#FF6B00] text-lg">24</p>
-                                            <p className="text-[#6C757D] text-xs">Orders</p>
-                                        </div>
-                                        <div className="w-px h-8 bg-gray-200"></div>
-                                        <div className="text-center sm:text-left">
-                                            <p className="font-bold text-purple-500 text-lg">1,250</p>
-                                            <p className="text-[#6C757D] text-xs">Points</p>
-                                        </div>
-                                        <div className="w-px h-8 bg-gray-200"></div>
-                                        <div className="text-center sm:text-left">
-                                            <p className="font-bold text-green-500 text-lg">Gold</p>
-                                            <p className="text-[#6C757D] text-xs">Tier</p>
+                                        {/* Stats Row */}
+                                        <div className="flex items-center justify-center sm:justify-start gap-6 text-sm">
+                                            <div className="text-center sm:text-left">
+                                                <p className="font-bold text-[#FF6B00] text-lg">24</p>
+                                                <p className="text-[#6C757D] text-xs">Orders</p>
+                                            </div>
+                                            <div className="w-px h-8 bg-gray-200"></div>
+                                            <div className="text-center sm:text-left">
+                                                <p className="font-bold text-purple-500 text-lg">1,250</p>
+                                                <p className="text-[#6C757D] text-xs">Points</p>
+                                            </div>
+                                            <div className="w-px h-8 bg-gray-200"></div>
+                                            <div className="text-center sm:text-left">
+                                                <p className="font-bold text-green-500 text-lg">Gold</p>
+                                                <p className="text-[#6C757D] text-xs">Tier</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Action Buttons */}
-                                <div className="flex gap-3">
-                                    <button
-                                        className="flex-1 px-6 py-3 bg-gradient-to-r from-[#FF6B00] to-[#FF8C3A] hover:from-[#FF8C3A] hover:to-[#FF6B00] text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-                                        aria-label="Edit your profile"
-                                    >
-                                        <Settings size={18} />
-                                        Edit Profile
-                                    </button>
-                                    <button
-                                        onClick={handleLogout}
-                                        className="px-6 py-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold transition-all duration-300 border-2 border-red-200 hover:border-red-300 transform hover:scale-105 active:scale-95 flex items-center gap-2"
-                                        aria-label="Sign out of your account"
-                                    >
-                                        <LogOut size={18} />
-                                        <span className="hidden sm:inline">Sign Out</span>
-                                    </button>
+                                    {/* Action Buttons */}
+                                    <div className="flex gap-3">
+                                        <button
+                                            className="flex-1 px-6 py-3 bg-gradient-to-r from-[#FF6B00] to-[#FF8C3A] hover:from-[#FF8C3A] hover:to-[#FF6B00] text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                                            aria-label="Edit your profile"
+                                        >
+                                            <Settings size={18} />
+                                            Edit Profile
+                                        </button>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="px-6 py-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold transition-all duration-300 border-2 border-red-200 hover:border-red-300 transform hover:scale-105 active:scale-95 flex items-center gap-2"
+                                            aria-label="Sign out of your account"
+                                        >
+                                            <LogOut size={18} />
+                                            <span className="hidden sm:inline">Sign Out</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Card>
-                </div>
+                        </Card>
+                    </div>
                 )}
                 {/* End of authentication check */}
 

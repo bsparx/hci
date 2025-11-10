@@ -9,6 +9,7 @@ FoodHub now includes a complete authentication system with beautiful, accessible
 ### 🔐 Authentication Pages
 
 #### **Sign In Page** (`/login`)
+
 - **Beautiful gradient background** with animated patterns
 - **Email and password inputs** with show/hide password toggle
 - **Google Sign-In button** (UI only, ready for integration)
@@ -19,6 +20,7 @@ FoodHub now includes a complete authentication system with beautiful, accessible
 - **Loading states** with spinner animation
 
 #### **Sign Up Page** (`/signup`)
+
 - **All features from Sign In** plus:
 - **Name field** for user registration
 - **Password strength indicator** (Weak/Medium/Strong with visual bar)
@@ -30,6 +32,7 @@ FoodHub now includes a complete authentication system with beautiful, accessible
 ### 🗄️ Database
 
 **Users Table Structure:**
+
 ```sql
 CREATE TABLE users (
     id TEXT PRIMARY KEY,
@@ -46,6 +49,7 @@ CREATE TABLE users (
 ### 🎯 User Flow
 
 1. **Non-authenticated users** see a beautiful welcome screen on the Account page with:
+
    - Sign In and Create Account buttons
    - List of benefits (Save Favorites, Earn Rewards, Track Orders)
    - Clear call-to-action
@@ -61,9 +65,11 @@ CREATE TABLE users (
 ## API Endpoints
 
 ### POST `/api/auth/login`
+
 Authenticate a user with email and password.
 
 **Request:**
+
 ```json
 {
   "email": "test@example.com",
@@ -72,6 +78,7 @@ Authenticate a user with email and password.
 ```
 
 **Response (Success):**
+
 ```json
 {
   "message": "Login successful",
@@ -86,6 +93,7 @@ Authenticate a user with email and password.
 ```
 
 **Response (Error):**
+
 ```json
 {
   "message": "Invalid email or password"
@@ -93,9 +101,11 @@ Authenticate a user with email and password.
 ```
 
 ### POST `/api/auth/signup`
+
 Create a new user account.
 
 **Request:**
+
 ```json
 {
   "name": "John Doe",
@@ -105,6 +115,7 @@ Create a new user account.
 ```
 
 **Response (Success):**
+
 ```json
 {
   "message": "Account created successfully",
@@ -118,6 +129,7 @@ Create a new user account.
 ```
 
 **Response (Error):**
+
 ```json
 {
   "message": "An account with this email already exists"
@@ -129,6 +141,7 @@ Create a new user account.
 ### Testing the System
 
 **Test Account:**
+
 - Email: `test@example.com`
 - Password: `password123`
 
@@ -137,6 +150,7 @@ OR create a new account using the Sign Up page.
 ### Adding a Test User Manually
 
 Run this command to add the test user:
+
 ```bash
 npx tsx lib/add-test-user.ts
 ```
@@ -144,7 +158,7 @@ npx tsx lib/add-test-user.ts
 ### Using Authentication in Your Code
 
 ```tsx
-import { useAuth } from '@/lib/auth-context';
+import { useAuth } from "@/lib/auth-context";
 
 function MyComponent() {
   const { user, isAuthenticated, login, signup, logout } = useAuth();
@@ -166,9 +180,10 @@ function MyComponent() {
 
 ## Security Notes
 
-⚠️ **Important**: This implementation stores passwords in **plain text** for UI/UX demonstration purposes only. 
+⚠️ **Important**: This implementation stores passwords in **plain text** for UI/UX demonstration purposes only.
 
 **For production use**, you should:
+
 1. Hash passwords using bcrypt or similar
 2. Implement JWT or session-based authentication
 3. Add CSRF protection
@@ -180,6 +195,7 @@ function MyComponent() {
 ## UI/UX Features
 
 ### Accessibility
+
 - ✅ Full keyboard navigation support
 - ✅ Screen reader optimized with ARIA labels
 - ✅ Clear focus indicators
@@ -188,6 +204,7 @@ function MyComponent() {
 - ✅ Proper form structure and labels
 
 ### Visual Design
+
 - 🎨 Beautiful gradient backgrounds
 - ✨ Smooth animations and transitions
 - 📱 Fully responsive (mobile-first)
@@ -196,6 +213,7 @@ function MyComponent() {
 - 🌟 Consistent with FoodHub brand colors
 
 ### User Experience
+
 - ⚡ Fast and responsive
 - 💡 Helpful error messages
 - 🔄 Loading states for all actions
@@ -208,7 +226,9 @@ function MyComponent() {
 ## Pages Overview
 
 ### `/login` - Sign In Page
+
 ![Sign In Features]
+
 - Email input with mail icon
 - Password input with lock icon and show/hide toggle
 - "Forgot Password?" link
@@ -218,7 +238,9 @@ function MyComponent() {
 - Demo credentials displayed
 
 ### `/signup` - Sign Up Page
+
 ![Sign Up Features]
+
 - Full Name input with user icon
 - Email input with validation
 - Password input with strength indicator
@@ -229,12 +251,15 @@ function MyComponent() {
 - Terms of Service acceptance
 
 ### `/account` - Account Page
+
 **Non-authenticated:**
+
 - Welcome message
 - Benefits showcase
 - Sign In and Create Account buttons
 
 **Authenticated:**
+
 - User profile with avatar
 - Name and email display
 - Account statistics

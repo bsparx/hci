@@ -101,7 +101,7 @@ export default function CartPage() {
                                         {item.foodItem.name}
                                     </h3>
                                     <p className="text-[#FF6B00] font-bold">
-                                        ₹{item.foodItem.price}
+                                        Rs {item.foodItem.price}
                                     </p>
                                 </div>
                                 <div className="flex flex-col items-end justify-between">
@@ -142,21 +142,21 @@ export default function CartPage() {
                         </h3>
                         <div className="flex justify-between text-[#6C757D]">
                             <span>Subtotal</span>
-                            <span>₹{subtotal}</span>
+                            <span>Rs {subtotal}</span>
                         </div>
                         <div className="flex justify-between text-[#6C757D]">
                             <span>Delivery Fee</span>
-                            <span>₹{deliveryFee}</span>
+                            <span>Rs {deliveryFee}</span>
                         </div>
                         {discount > 0 && (
                             <div className="flex justify-between text-[#28A745]">
                                 <span>Discount ({restaurant?.discount}%)</span>
-                                <span>-₹{discount}</span>
+                                <span>-Rs {discount}</span>
                             </div>
                         )}
                         <div className="border-t pt-3 flex justify-between text-[#212529] font-bold text-lg">
                             <span>Total</span>
-                            <span>₹{total}</span>
+                            <span>Rs {total}</span>
                         </div>
                     </div>
                 </Card>

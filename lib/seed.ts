@@ -1,5 +1,11 @@
 // Database seeding script
-import { initializeDatabase, restaurantDb, menuDb, reviewsDb, usersDb } from "./db";
+import {
+  initializeDatabase,
+  restaurantDb,
+  menuDb,
+  reviewsDb,
+  usersDb,
+} from "./db";
 import { restaurants } from "./data";
 import { randomUUID } from "crypto";
 
@@ -25,7 +31,8 @@ export async function seedDatabase() {
       password: "password123",
       name: "Test User",
       phone: "+1234567890",
-      avatar: "https://ui-avatars.com/api/?name=Test+User&background=FF6B00&color=fff&size=200",
+      avatar:
+        "https://ui-avatars.com/api/?name=Test+User&background=FF6B00&color=fff&size=200",
     };
     usersDb.create(testUser);
     console.log("   ✓ Test user created (test@example.com / password123)");

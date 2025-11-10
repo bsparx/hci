@@ -177,4 +177,5 @@ Visual indicators and order prevention for closed restaurants.
 Global cart management with real-time updates and calculations.
 
 Built with ❤️ using Next.js and TypeScript
+
 # hci

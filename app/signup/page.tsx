@@ -21,7 +21,7 @@ export default function SignupPage() {
     // Password strength validation
     const getPasswordStrength = () => {
         if (!password) return { score: 0, label: '', color: '' };
-        
+
         let score = 0;
         if (password.length >= 8) score++;
         if (password.length >= 12) score++;
@@ -184,7 +184,7 @@ export default function SignupPage() {
                                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
                             </div>
-                            
+
                             {/* Password Strength Indicator */}
                             {password && (
                                 <div className="mt-2">
@@ -195,11 +195,10 @@ export default function SignupPage() {
                                                 style={{ width: `${(passwordStrength.score / 5) * 100}%` }}
                                             ></div>
                                         </div>
-                                        <span className={`text-xs font-semibold ${
-                                            passwordStrength.score <= 2 ? 'text-red-500' :
-                                            passwordStrength.score <= 3 ? 'text-yellow-500' :
-                                            'text-green-500'
-                                        }`}>
+                                        <span className={`text-xs font-semibold ${passwordStrength.score <= 2 ? 'text-red-500' :
+                                                passwordStrength.score <= 3 ? 'text-yellow-500' :
+                                                    'text-green-500'
+                                            }`}>
                                             {passwordStrength.label}
                                         </span>
                                     </div>
@@ -235,7 +234,7 @@ export default function SignupPage() {
                                     {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
                             </div>
-                            
+
                             {/* Password Match Indicator */}
                             {confirmPassword && password === confirmPassword && (
                                 <div className="mt-2 flex items-center gap-2 text-green-600">

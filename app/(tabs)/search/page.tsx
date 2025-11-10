@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Search as SearchIcon, X, SlidersHorizontal, Star, Clock, MapPin, TrendingUp, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import RestaurantCard from '@/components/shared/RestaurantCard';
@@ -8,7 +8,7 @@ import { restaurants, cuisineCategories } from '@/lib/data';
 
 type SortOption = 'relevance' | 'rating' | 'distance' | 'time';
 
-export default function SearchPage() {
+function SearchContent() {
     const searchParams = useSearchParams();
     const initialQuery = searchParams.get('q') ? decodeURIComponent(searchParams.get('q')!) : '';
 
@@ -373,5 +373,27 @@ export default function SearchPage() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function SearchPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pb-24">
+                <div className="max-w-7xl mx-auto px-4 py-6">
+                    <div className="animate-pulse">
+                        <div className="h-12 bg-gray-200 rounded-xl mb-6"></div>
+                        <div className="h-8 bg-gray-200 rounded-lg w-48 mb-4"></div>
+                        <div className="grid gap-4">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="h-32 bg-gray-200 rounded-2xl"></div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }>
+            <SearchContent />
+        </Suspense>
     );
 }

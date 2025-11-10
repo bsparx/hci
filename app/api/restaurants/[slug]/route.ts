@@ -3,10 +3,11 @@ import { restaurantDb, menuDb, reviewsDb } from "@/lib/db";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const restaurant = restaurantDb.getBySlug(params.slug);
+    const { slug } = await params;
+    const restaurant = restaurantDb.getBySlug(slug);
 
     if (!restaurant) {
       return NextResponse.json(

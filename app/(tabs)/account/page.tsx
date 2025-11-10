@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/auth-context';
 import {
     User,
     MapPin,
@@ -19,12 +21,21 @@ import {
     Settings,
     Globe,
     Moon,
-    Sun
+    Sun,
+    LogIn,
+    UserPlus
 } from 'lucide-react';
 import Card from '@/components/ui/Card';
 
 export default function AccountPage() {
+    const router = useRouter();
+    const { user, isAuthenticated, logout } = useAuth();
     const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const handleLogout = () => {
+        logout();
+        router.push('/login');
+    };
 
     const accountLinks = [
         {
@@ -167,35 +178,88 @@ export default function AccountPage() {
             </div>
 
             <div className="max-w-screen-xl mx-auto px-4 -mt-8">
-                {/* Premium Profile Card */}
-                <div className="relative group">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF6B00] via-pink-500 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
-                    <Card className="relative bg-white border-2 border-orange-100">
-                        <div className="p-6 sm:p-8">
-                            <div className="flex flex-col sm:flex-row items-center gap-6">
-                                {/* Premium Avatar with Ring */}
-                                <div className="relative">
-                                    <div className="absolute -inset-2 bg-gradient-to-r from-[#FF6B00] via-pink-500 to-purple-500 rounded-full blur-md opacity-50 animate-pulse"></div>
-                                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-[#FF6B00] via-[#FF8C3A] to-pink-500 rounded-full flex items-center justify-center ring-4 ring-white shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                                        <User size={48} className="text-white" strokeWidth={2.5} />
+                {/* Show Login/Signup for non-authenticated users */}
+                {!isAuthenticated ? (
+                    <div className="relative group mb-8">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF6B00] via-pink-500 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+                        <Card className="relative bg-white border-2 border-orange-100">
+                            <div className="p-8 text-center">
+                                <div className="w-24 h-24 bg-gradient-to-br from-[#FF6B00] to-[#FF8C3A] rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                                    <User size={48} className="text-white" strokeWidth={2.5} />
+                                </div>
+                                <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                                    Sign in to Your Account
+                                </h2>
+                                <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                                    Join FoodHub to track your orders, save favorites, and unlock exclusive rewards!
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <button
+                                        onClick={() => router.push('/login')}
+                                        className="px-8 py-4 bg-gradient-to-r from-[#FF6B00] to-[#FF8C3A] text-white font-bold rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                                    >
+                                        <LogIn size={20} />
+                                        Sign In
+                                    </button>
+                                    <button
+                                        onClick={() => router.push('/signup')}
+                                        className="px-8 py-4 bg-white border-2 border-[#FF6B00] text-[#FF6B00] font-bold rounded-xl hover:bg-[#FF6B00] hover:text-white transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                                    >
+                                        <UserPlus size={20} />
+                                        Create Account
+                                    </button>
+                                </div>
+                                <div className="mt-6 flex items-center justify-center gap-8 text-sm text-gray-500">
+                                    <div className="flex items-center gap-2">
+                                        <Heart size={16} className="text-pink-500" />
+                                        <span>Save Favorites</span>
                                     </div>
-                                    {/* Premium Badge */}
-                                    <div className="absolute -bottom-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-2 ring-4 ring-white shadow-lg">
-                                        <Star size={16} className="text-white fill-white" />
+                                    <div className="flex items-center gap-2">
+                                        <Award size={16} className="text-yellow-500" />
+                                        <span>Earn Rewards</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Star size={16} className="text-orange-500" />
+                                        <span>Track Orders</span>
                                     </div>
                                 </div>
-
-                                {/* User Info */}
-                                <div className="flex-1 text-center sm:text-left">
-                                    <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                                        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#FF6B00] to-pink-500 bg-clip-text text-transparent">
-                                            Guest User
-                                        </h2>
-                                        <span className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold rounded-full">
-                                            PRO
-                                        </span>
+                            </div>
+                        </Card>
+                    </div>
+                ) : (
+                    /* Premium Profile Card */
+                    <div className="relative group">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF6B00] via-pink-500 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+                        <Card className="relative bg-white border-2 border-orange-100">
+                            <div className="p-6 sm:p-8">
+                                <div className="flex flex-col sm:flex-row items-center gap-6">
+                                    {/* Premium Avatar with Ring */}
+                                    <div className="relative">
+                                        <div className="absolute -inset-2 bg-gradient-to-r from-[#FF6B00] via-pink-500 to-purple-500 rounded-full blur-md opacity-50 animate-pulse"></div>
+                                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-[#FF6B00] via-[#FF8C3A] to-pink-500 rounded-full flex items-center justify-center ring-4 ring-white shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                                            {user?.avatar ? (
+                                                <img src={user.avatar} alt={user.name} className="w-full h-full rounded-full object-cover" />
+                                            ) : (
+                                                <User size={48} className="text-white" strokeWidth={2.5} />
+                                            )}
+                                        </div>
+                                        {/* Premium Badge */}
+                                        <div className="absolute -bottom-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-2 ring-4 ring-white shadow-lg">
+                                            <Star size={16} className="text-white fill-white" />
+                                        </div>
                                     </div>
-                                    <p className="text-[#6C757D] mb-4 font-medium">guest@foodhub.com</p>
+
+                                    {/* User Info */}
+                                    <div className="flex-1 text-center sm:text-left">
+                                        <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                                            <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#FF6B00] to-pink-500 bg-clip-text text-transparent">
+                                                {user?.name || 'Guest User'}
+                                            </h2>
+                                            <span className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold rounded-full">
+                                                PRO
+                                            </span>
+                                        </div>
+                                        <p className="text-[#6C757D] mb-4 font-medium">{user?.email || 'guest@foodhub.com'}</p>
 
                                     {/* Stats Row */}
                                     <div className="flex items-center justify-center sm:justify-start gap-6 text-sm">
@@ -216,18 +280,30 @@ export default function AccountPage() {
                                     </div>
                                 </div>
 
-                                {/* Edit Button */}
-                                <button
-                                    className="px-6 py-3 bg-gradient-to-r from-[#FF6B00] to-[#FF8C3A] hover:from-[#FF8C3A] hover:to-[#FF6B00] text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center gap-2"
-                                    aria-label="Edit your profile"
-                                >
-                                    <Settings size={18} />
-                                    Edit Profile
-                                </button>
+                                {/* Action Buttons */}
+                                <div className="flex gap-3">
+                                    <button
+                                        className="flex-1 px-6 py-3 bg-gradient-to-r from-[#FF6B00] to-[#FF8C3A] hover:from-[#FF8C3A] hover:to-[#FF6B00] text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                                        aria-label="Edit your profile"
+                                    >
+                                        <Settings size={18} />
+                                        Edit Profile
+                                    </button>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="px-6 py-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold transition-all duration-300 border-2 border-red-200 hover:border-red-300 transform hover:scale-105 active:scale-95 flex items-center gap-2"
+                                        aria-label="Sign out of your account"
+                                    >
+                                        <LogOut size={18} />
+                                        <span className="hidden sm:inline">Sign Out</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </Card>
                 </div>
+                )}
+                {/* End of authentication check */}
 
                 {/* Account Sections */}
                 <div className="mt-8 space-y-8">

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import { AccessibilityProvider } from "@/lib/accessibility-context";
+import { AuthProvider } from "@/lib/auth-context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased bg-[#F8F9FA]`}>
-        <AccessibilityProvider>
-          <CartProvider>
-            {children}
-          </CartProvider>
-        </AccessibilityProvider>
+        <AuthProvider>
+          <AccessibilityProvider>
+            <CartProvider>
+              {children}
+            </CartProvider>
+          </AccessibilityProvider>
+        </AuthProvider>
       </body>
     </html>
   );

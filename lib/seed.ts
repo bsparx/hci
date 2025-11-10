@@ -1,6 +1,7 @@
 // Database seeding script
-import { initializeDatabase, restaurantDb, menuDb, reviewsDb } from "./db";
+import { initializeDatabase, restaurantDb, menuDb, reviewsDb, usersDb } from "./db";
 import { restaurants } from "./data";
+import { randomUUID } from "crypto";
 
 export async function seedDatabase() {
   console.log("🌱 Starting database seeding...");
@@ -15,6 +16,19 @@ export async function seedDatabase() {
       console.log("⚠️  Database already seeded. Skipping...");
       return;
     }
+
+    // Seed test user
+    console.log("   Adding test user...");
+    const testUser = {
+      id: randomUUID(),
+      email: "test@example.com",
+      password: "password123",
+      name: "Test User",
+      phone: "+1234567890",
+      avatar: "https://ui-avatars.com/api/?name=Test+User&background=FF6B00&color=fff&size=200",
+    };
+    usersDb.create(testUser);
+    console.log("   ✓ Test user created (test@example.com / password123)");
 
     // Seed restaurants and menu items
     for (const restaurant of restaurants) {

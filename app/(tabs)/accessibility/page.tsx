@@ -6,13 +6,40 @@ import {
     RotateCcw, Check, ArrowLeft, Smartphone, Globe, Keyboard,
     Users, Heart, Volume2, Image, Mic, BookOpen
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function AccessibilityPage() {
     const router = useRouter();
     const { settings, updateSetting, resetSettings } = useAccessibility();
     const [showResetConfirm, setShowResetConfirm] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState('English');
+    const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsLanguageDropdownOpen(false);
+            }
+        };
+
+        if (isLanguageDropdownOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isLanguageDropdownOpen]);
+
+    const languageOptions = [
+        { value: 'English', label: 'English', flag: '🇬🇧' },
+        { value: 'Urdu', label: 'اردو (Urdu)', flag: '🇵🇰' },
+        { value: 'Pashto', label: 'پښتو (Pashto)', flag: '🇦🇫' },
+        { value: 'Sindhi', label: 'سنڌي (Sindhi)', flag: '🇵🇰' },
+    ];
 
     const fontSizeOptions = [
         { value: 'small' as const, label: 'Small', size: 'text-xs', description: '14px' },
@@ -229,6 +256,77 @@ export default function AccessibilityPage() {
                         All settings are saved automatically and will persist across sessions.
                     </p>
                 </div>
+
+                {/* Language Section */}
+                <section className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-12 bg-linear-to-br from-[#FF6B00] to-[#FF8534] rounded-2xl flex items-center justify-center shadow-lg">
+                            <Globe className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="flex-1">
+                            <h3 className="text-xl font-bold text-gray-900">Language</h3>
+                            <p className="text-sm text-gray-500">Choose your preferred language</p>
+                        </div>
+                    </div>
+                    <div className="relative" ref={dropdownRef}>
+                        <button
+                            onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                            className="w-full p-4 rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-all bg-white text-left flex items-center justify-between"
+                            aria-label="Select language"
+                            aria-expanded={isLanguageDropdownOpen}
+                        >
+                            <div className="flex items-center gap-3">
+                                <span className="text-2xl">
+                                    {languageOptions.find(lang => lang.value === selectedLanguage)?.flag}
+                                </span>
+                                <div>
+                                    <p className="text-sm text-gray-500 mb-0.5">Selected Language</p>
+                                    <p className="font-semibold text-gray-900">
+                                        {languageOptions.find(lang => lang.value === selectedLanguage)?.label}
+                                    </p>
+                                </div>
+                            </div>
+                            <svg
+                                className={`w-5 h-5 text-gray-400 transition-transform ${isLanguageDropdownOpen ? 'rotate-180' : ''}`}
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        
+                        {isLanguageDropdownOpen && (
+                            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 animate-in">
+                                {languageOptions.map((language) => (
+                                    <button
+                                        key={language.value}
+                                        onClick={() => {
+                                            setSelectedLanguage(language.value);
+                                            setIsLanguageDropdownOpen(false);
+                                        }}
+                                        className={`w-full p-4 text-left flex items-center gap-3 hover:bg-gray-50 transition-colors ${
+                                            selectedLanguage === language.value ? 'bg-[#FF6B00]/5' : ''
+                                        }`}
+                                    >
+                                        <span className="text-2xl">{language.flag}</span>
+                                        <span className="flex-1 font-medium text-gray-900">{language.label}</span>
+                                        {selectedLanguage === language.value && (
+                                            <div className="w-6 h-6 bg-[#FF6B00] rounded-full flex items-center justify-center">
+                                                <Check className="w-4 h-4 text-white" />
+                                            </div>
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-xl">
+                        <p className="text-xs text-blue-800">
+                            ℹ️ Language settings will be available in a future update. Currently for UI demonstration purposes.
+                        </p>
+                    </div>
+                </section>
 
                 {/* Seniors Section */}
                 <section className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">

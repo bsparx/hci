@@ -78,6 +78,20 @@ export function initializeDatabase() {
         )
     `);
 
+  // Create users table
+  db.exec(`
+        CREATE TABLE IF NOT EXISTS users (
+            id TEXT PRIMARY KEY,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            name TEXT NOT NULL,
+            phone TEXT,
+            avatar TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    `);
+
   // Create indexes for better query performance
   db.exec(`
         CREATE INDEX IF NOT EXISTS idx_menu_restaurant ON menu_items(restaurant_id);
@@ -299,6 +313,53 @@ export const ordersDb = {
 
   delete: (id: string) => {
     const stmt = db.prepare("DELETE FROM orders WHERE id = ?");
+    return stmt.run(id);
+  },
+};
+
+// User operations
+export const usersDb = {
+  getAll: () => {
+    const stmt = db.prepare("SELECT * FROM users ORDER BY created_at DESC");
+    return stmt.all();
+  },
+
+  getById: (id: string) => {
+    const stmt = db.prepare("SELECT * FROM users WHERE id = ?");
+    return stmt.get(id);
+  },
+
+  getByEmail: (email: string) => {
+    const stmt = db.prepare("SELECT * FROM users WHERE email = ?");
+    return stmt.get(email);
+  },
+
+  create: (user: any) => {
+    const stmt = db.prepare(`
+      INSERT INTO users (id, email, password, name, phone, avatar)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `);
+    return stmt.run(
+      user.id,
+      user.email,
+      user.password,
+      user.name,
+      user.phone || null,
+      user.avatar || null
+    );
+  },
+
+  update: (id: string, updates: any) => {
+    const stmt = db.prepare(`
+      UPDATE users 
+      SET name = ?, phone = ?, avatar = ?, updated_at = CURRENT_TIMESTAMP 
+      WHERE id = ?
+    `);
+    return stmt.run(updates.name, updates.phone, updates.avatar, id);
+  },
+
+  delete: (id: string) => {
+    const stmt = db.prepare("DELETE FROM users WHERE id = ?");
     return stmt.run(id);
   },
 };
